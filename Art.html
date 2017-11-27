@@ -1,0 +1,63 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+    <title>p5js Template</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.3/p5.js"></script>
+
+    <script>
+        var brushSize;
+        var col;
+        var coll;
+        var color;
+        brushSize = 20;
+        col = 0;
+        coll = 0;
+        color = 0;
+
+        function setup() {
+            createCanvas(800, 600);
+
+        }
+
+        function draw() {
+
+        }
+
+        function mouseDragged() {
+            ellipse(mouseX, mouseY, brushSize, brushSize)
+            stroke(255,255,255,0)
+        }
+
+        function keyPressed() {
+            if (keyCode == UP_ARROW) {
+                brushSize += 10; //Change Brush Size (Bigger)
+            }
+            if (keyCode == DOWN_ARROW) {
+                brushSize -= 10; //Change Brush Size (Smaller)
+            }
+            if (keyCode == LEFT_ARROW) {
+                fill(random(255),random(255),random(255)); //Change Brush Color
+            }
+            if (keyCode == RIGHT_ARROW){
+                background(255); //Clear Canvas
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <div id="code" class="container-fluid">
+        <script src="https://gist-it.appspot.com/github/joanb4092/p5js/blob/master/Art.html?footer=0"></script>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script>
+        $(window).bind("load", function() {
+            $('#code').before($('#defaultCanvas0').remove());
+        });
+    </script>
+</body>
+
+
+</html>
