@@ -1,0 +1,119 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+    <title>Pong</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.4.13/p5.js"></script>
+    <script>
+        var whiteToPurple = 255;
+        var shrinkPaddle = 200;
+        var ballWidth = 20;
+        var ballHeight = 20;
+        var ballX;
+        var ballY;
+        var ballSpeedX = 5;
+        var ballSpeedY = 5;
+        var paddleHeight = 30;
+
+        function setup() {
+            createCanvas(800, 600);
+            noCursor();
+            //Set the ball at a random X and Y positon
+            ballX = random(width);
+            ballY = random(height / 2);
+        }
+
+        function draw() {
+            background(50, 20, 80);
+            moveBall();
+            checkCollide();
+            drawBall();
+            drawPaddle();
+            mousePressed();
+            drawBall();
+
+
+        }
+
+        function moveBall() {
+            //Makes the ball move by a certain amount of pixels
+            ballX = ballX + ballSpeedX;
+            ballY = ballY + ballSpeedY;
+
+            console.log("ballSpeedX: " + ballSpeedX +
+                ", ballSpeedY: " + ballSpeedY);
+        }
+
+        function checkCollide() {
+            //This code has variable for when the ball hits the top of the canvas, the walls, and the paddle
+            if (ballX < 0 || ballX > width) {
+                ballSpeedX = ballSpeedX * -1;
+            }
+            if (ballY < 0) {
+                ballSpeedY = ballSpeedY * -1;
+            }
+            if (ballY > height - paddleHeight) {
+                if (ballX > mouseX && ballX < mouseX + 200) {
+                    //Causes the ball to move in the opposite direction
+                    ballSpeedY = ballSpeedY * -1;
+                    //Changes the width of the paddle to a random number between 200 everytime the ball hits the paddle
+                    shrinkPaddle = random(200);
+                    //Changes the balls height and Width everytime it hits the paddle
+                    ballHeight = random(50)
+                    ballWidth = random(50)
+                    //Makes the top rectangle to change color (Bar used to see the ball)
+                    color -= 10;
+                    whiteToPurple-=20
+                    if (whiteToPurple == 0){
+                        whiteToPurple +=10;
+                        if (whiteToPurple == 200){
+                            whiteToPurple -= 20;
+                        }
+                    }
+
+                }
+                else {
+                    text("GAME OVER!", width / 2, height / 2);
+                    noLoop();
+                }
+            }
+        }
+
+        function drawBall() {
+            noStroke();
+            fill(50,20,87);
+            //Starts at a random X and Y postion, and its height and width changes when it hits the paddle
+            ellipse(ballX, ballY, ballHeight, ballWidth);
+
+
+        }
+
+        function drawPaddle() {
+            strokeWeight(4);
+            fill(255)
+            //Paddle
+            rect(mouseX, height - paddleHeight - 4, shrinkPaddle, paddleHeight);
+            //Uses variables to change the bars colors
+            fill(whiteToPurple-205,whiteToPurple-235,whiteToPurple/2)
+            //Vison Bar used to see the ball
+            rect(mouseX-800, 30, 3000,60)
+        }
+    </script>
+</head>
+
+<body>
+<form><input TYPE="button" onClick="history.go(0)" value="Reset"></form>
+    <div id="code" class="container-fluid">
+        <script src="https://gist-it.appspot.com/github/USERNAME/p5js/blob/gh-pages/FILENAME.html?footer=0"></script>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script>
+        $(window).bind("load", function() {
+            $('#code').before($('#defaultCanvas0').remove());
+        });
+    </script>
+</body>
+
+
+</html>
