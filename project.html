@@ -1,0 +1,93 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+    <title>Objects Project</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.4.13/p5.js"></script>
+    <script>
+      
+      var rainDrops = [];
+      var blue = 25;
+      var y = 400;
+      var opacity = 255;
+      function setup() {
+        createCanvas(500,500);
+      }
+      
+      function draw() {
+        background(50,80);
+ 
+
+        //increases the amount of raindrops being displayed
+        frameRate(30)
+        //Constantly creates raindrops
+        rainDrops.push(new Rain());
+        for(var i=0; i<rainDrops.length; i++){
+          rainDrops[i].move();
+          rainDrops[i].display();
+          fill(50)
+          rect(mouseX-80,mouseY,160,800)
+          fill(40,120,150)
+          rect(mouseX-60,mouseY-5,120,25)
+          rect(mouseX-80,mouseY,160,15)
+          fill(60,160,60)
+          rect(mouseX,mouseY,5,80)
+          fill(0)
+          rect(0,400,200,400)
+          fill(255);
+          textSize(40);
+          text("Rain Modifier",0,350);
+        }
+      }
+      
+      
+      function Rain(){
+        this.x = 0;
+        this.y = 0;
+        
+        this.move = function(){
+          this.x += random(random(60),random(70)+10);
+          this.y += random(random(-40),random(200));
+        }
+
+        this.display = function(){
+          //makes the raindrops appear in different places
+          noStroke();
+          fill(50,blue+20,blue);
+          rect(this.x,this.y,10,50);
+          rect(this.x+200,this.y+5,5,50);
+          rect(this.x+300,this.y+5,5,50);
+        }
+      }
+      function keyPressed(){
+        //Turns the raindrops different colors/different shades of green or blue
+        if(keyCode == "C" || "c"){
+          blue = random(255);
+          fill(90);
+          y -= 20;
+          opacity -= 25;
+          ellipse(0,y,120,120,opacity)
+        }
+        if (y == 0){
+          y = 400;
+        }
+      }
+    </script>
+</head>
+
+<body>
+<form><input TYPE="button" onClick="history.go(0)" value="Reset"></form>
+    <div id="code" class="container-fluid">
+        <script src="https://gist-it.appspot.com/github/joanb4092/p5js/blob/master/project.html?footer=0"></script>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script>
+        $(window).bind("load", function() {
+            $('#code').before($('#defaultCanvas0').remove());
+        });
+    </script>
+</body>
+
+
+</html>
